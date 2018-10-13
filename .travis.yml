@@ -19,7 +19,6 @@ before_script:
 script:
   - docker-compose -f docker-compose-ci.yml run users python manage.py test
   - docker-compose -f docker-compose-ci.yml run users flake8 project
-  - docker-compose -f docker-compose-ci.yml run web npm test -- --coverage
 
 after_script:
   - docker-compose -f docker-compose-ci.yml down
