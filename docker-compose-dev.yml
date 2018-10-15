@@ -7,7 +7,7 @@ services:
       context: ../codecheck-users
       dockerfile: Dockerfile-dev
     volumes:
-      - '../codecheck-users:/usr/src/app'
+      - '../codecheck-users:/usr/src/codecheck/users'
     ports:
       - 5001:5000
     environment:
@@ -45,8 +45,8 @@ services:
       context: ../codecheck-web
       dockerfile: Dockerfile-dev
     volumes:
-      - '../codecheck-web:/usr/src/app'
-      - '/usr/src/app/node_modules'
+      - '../codecheck-web:/usr/src/codecheck/web'
+      - '/usr/src/codecheck/web/node_modules'
     ports:
       - 3007:3000
     environment:
