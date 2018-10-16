@@ -36,15 +36,3 @@ services:
       - 80:80
     depends_on:
       - users
-
-  web:
-    build:
-      context: https://github.com/opcodio/codecheck-web.git
-      dockerfile: Dockerfile-dev
-    ports:
-      - 3007:3000
-    environment:
-      - NODE_ENV=development
-      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
-    depends_on:
-      - users
