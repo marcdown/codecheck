@@ -4,7 +4,7 @@ services:
 
   users:
     build:
-      context: ../codecheck-users
+      context: ./services/users
       dockerfile: Dockerfile-prod
     environment:
       - FLASK_ENV=production
@@ -19,7 +19,7 @@ services:
   
   users-db:
     build:
-      context: ../codecheck-users/project/db
+      context: ./services/users/project/db
       dockerfile: Dockerfile
     ports:
       - 5435:5432
@@ -27,17 +27,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile-prod
-    restart: always
-    ports:
-      - 80:80
-    depends_on:
-      - users
-      - web
-
   web:
     build:
       context: ../codecheck-web
@@ -49,3 +38,14 @@ services:
       - 3007:80
     depends_on:
       - users
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile-prod
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - users
+      - web
