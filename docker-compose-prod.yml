@@ -29,7 +29,7 @@ services:
   
   web:
     build:
-      context: ../codecheck-web
+      context: ./services/web
       dockerfile: Dockerfile-prod
       args:
         - NODE_ENV=production
