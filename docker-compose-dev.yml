@@ -31,10 +31,10 @@ services:
 
   web:
     build:
-      context: ../codecheck-web
+      context: ./services/web
       dockerfile: Dockerfile-dev
     volumes:
-      - '../codecheck-web:/usr/src/app'
+      - './services/web:/usr/src/app'
       - '/usr/src/app/node_modules'
     ports:
       - 3007:3000

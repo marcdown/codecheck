@@ -9,14 +9,14 @@ inspect() {
 }
 
 # run unit and integration tests
-docker-compose -f docker-compose-ci.yml up -d --build
-docker-compose -f docker-compose-ci.yml run users python manage.py test
+docker-compose -f docker-compose-dev.yml up -d --build
+docker-compose -f docker-compose-dev.yml run users python manage.py test
 inspect $? users
-docker-compose -f docker-compose-ci.yml run users flake8 project
+docker-compose -f docker-compose-dev.yml run users flake8 project
 inspect $? users-lint
-docker-compose -f docker-compose-ci.yml run web npm test -- --coverage
+docker-compose -f docker-compose-dev.yml run web npm test -- --coverage
 inspect $? web
-docker-compose -f docker-compose-ci.yml down
+docker-compose -f docker-compose-dev.yml down
 
 # return proper code
 if [ -n "${fails}" ]; then
