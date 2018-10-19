@@ -4,7 +4,7 @@ services:
 
   users:
     build:
-      context: https://github.com/opcodio/codecheck-users.git
+      context: ./services/users
       dockerfile: Dockerfile-dev
     environment:
       - FLASK_ENV=development
@@ -19,7 +19,7 @@ services:
   
   users-db:
     build:
-      context: https://github.com/opcodio/codecheck-users.git#master:project/db
+      context: ./services/users/project/db
       dockerfile: Dockerfile
     ports:
       - 5435:5432
@@ -27,17 +27,6 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile-prod
-    restart: always
-    ports:
-      - 80:80
-    depends_on:
-      - users
-      - web
-
   web:
     build:
       context: https://github.com/opcodio/codecheck-web.git
@@ -48,3 +37,14 @@ services:
       - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
     depends_on:
       - users
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile-prod
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - users
+      - web

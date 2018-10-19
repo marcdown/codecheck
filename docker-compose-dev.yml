@@ -4,10 +4,10 @@ services:
 
   users:
     build:
-      context: ../codecheck-users
+      context: ./services/users
       dockerfile: Dockerfile-dev
     volumes:
-      - '../codecheck-users:/usr/src/codecheck/users'
+      - './services/users:/usr/src/app'
     ports:
       - 5001:5000
     environment:
@@ -21,13 +21,28 @@ services:
   
   users-db:
     build:
-      context: ../codecheck-users/project/db
+      context: ./services/users/project/db
       dockerfile: Dockerfile
     ports:
       - 5435:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
+  web:
+    build:
+      context: ../codecheck-web
+      dockerfile: Dockerfile-dev
+    volumes:
+      - '../codecheck-web:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    ports:
+      - 3007:3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+    depends_on:
+      - users
 
   nginx:
     build:
@@ -39,18 +54,3 @@ services:
     depends_on:
       - users
       - web
-
-  web:
-    build:
-      context: ../codecheck-web
-      dockerfile: Dockerfile-dev
-    volumes:
-      - '../codecheck-web:/usr/src/codecheck/web'
-      - '/usr/src/codecheck/web/node_modules'
-    ports:
-      - 3007:3000
-    environment:
-      - NODE_ENV=development
-      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
-    depends_on:
-      - users
