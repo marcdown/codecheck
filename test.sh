@@ -14,7 +14,7 @@ docker-compose -f docker-compose-dev.yml run users python manage.py test
 inspect $? users
 docker-compose -f docker-compose-dev.yml run users flake8 project
 inspect $? users-lint
-docker-compose -f docker-compose-dev.yml run web npm test -- --coverage
+docker-compose -f docker-compose-dev.yml run web yarn test --coverage
 inspect $? web
 docker-compose -f docker-compose-dev.yml down
 

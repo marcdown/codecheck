@@ -11,7 +11,8 @@ WORKDIR /usr/src/app
 # install app dependencies
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY package.json /usr/src/app/package.json
-RUN npm install --silent
+COPY yarn.lock /usr/src/app/yarn.lock
+RUN yarn install
 
 # set environment variables
 ARG REACT_APP_USERS_SERVICE_URL
@@ -21,7 +22,7 @@ ENV NODE_ENV $NODE_ENV
 
 # create build
 COPY . /usr/src/app
-RUN npm run build
+RUN yarn build
 
 
 #########
