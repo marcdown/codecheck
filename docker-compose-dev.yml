@@ -46,7 +46,7 @@ services:
 
   nginx:
     build:
-      context: ./nginx
+      context: ./services/nginx
       dockerfile: Dockerfile-dev
     restart: always
     ports:
