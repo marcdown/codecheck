@@ -1,0 +1,7 @@
+{
+    "name": "codecheck",
+    "devDependencies": {
+        "cypress": "^3.1.0",
+        "randomstring": "^1.1.5"
+    }
+}
