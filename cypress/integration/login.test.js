@@ -46,7 +46,7 @@ describe('Login', () => {
         .get('table')
         .find('tbody > tr').last()
         .find('td').contains(username);
-        //cy.get('.notification.is-success').contains('Welcome!');
+        cy.get('.notification.is-success').contains('Welcome!');
         cy.get('.navbar-burger').click();
         cy.get('.navbar-menu').within(() => {
             cy
@@ -70,7 +70,7 @@ describe('Login', () => {
         });
     });
 
-    /*it('should throw an error if the credentials are incorrect', () => {
+    it('should throw an error if the credentials are incorrect', () => {
 
         // attempt to log in
         cy
@@ -92,7 +92,7 @@ describe('Login', () => {
         });
         cy
         .get('.notification.is-success').should('not.be.visible')
-        .get('.notification.is-danger').contains('User does not exist.');
+        .get('.notification.is-danger').contains('Login failed.');
 
         // attempt to log in
         cy
@@ -115,6 +115,6 @@ describe('Login', () => {
         });
         cy
         .get('.notification.is-success').should('not.be.visible')
-        .get('.notification.is-danger').contains('User does not exist.');
-    });*/
+        .get('.notification.is-danger').contains('Login failed.');
+    });
 });

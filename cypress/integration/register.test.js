@@ -60,7 +60,7 @@ describe('Register', () => {
         cy.get('.validation-list > .error').contains('Password must be greater than 10 characters.');
     });
 
-    /*it('should throw an error if the username is taken', () => {
+    it('should throw an error if the username is taken', () => {
         // register user with duplicate user name
         cy
         .visit('/register')
@@ -82,7 +82,7 @@ describe('Register', () => {
         });
         cy
         .get('.notification.is-success').should('not.be.visible')
-        .get('.notification.is-danger').contains('That user already exists.');
+        .get('.notification.is-danger').contains('User already exists.');
     });
 
     it('should throw an error if the email is taken', () => {
@@ -107,6 +107,6 @@ describe('Register', () => {
         });
         cy
         .get('.notification.is-success').should('not.be.visible')
-        .get('.notification.is-danger').contains('That user already exists.');
-    });*/
+        .get('.notification.is-danger').contains('User already exists.');
+    });
 });
