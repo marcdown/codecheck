@@ -31,6 +31,7 @@ describe('Status', () => {
 
         // assert '/status' is displayed properly
         cy.visit('/status');
+        cy.wait(400);
         cy.get('.navbar-burger').click();
         cy.contains('User Status').click();
         cy.get('li > strong').contains('User ID:')
