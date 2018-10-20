@@ -9,19 +9,19 @@ describe('Register', () => {
 
     it('should display the registration form', () => {
         cy
-        .visit('/register')
-        .get('h1').contains('Register')
-        .get('form')
+            .visit('/register')
+            .get('h1').contains('Register')
+            .get('form')
     });
 
     it('should allow a user to register', () => {
         // register user
         cy
-        .visit('/register')
-        .get('input[name="username"]').type(username)
-        .get('input[name="email"]').type(email)
-        .get('input[name="password"]').type(password)
-        .get('input[type="submit"]').click()
+            .visit('/register')
+            .get('input[name="username"]').type(username)
+            .get('input[name="email"]').type(email)
+            .get('input[name="password"]').type(password)
+            .get('input[type="submit"]').click()
 
         // assert user is redirected to '/'
         // assert '/' is displayed properly

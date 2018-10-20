@@ -9,19 +9,19 @@ describe('Login', () => {
 
     it('should display the sign in form', () => {
         cy
-        .visit('/login')
-        .get('h1').contains('Login')
-        .get('form')
+            .visit('/login')
+            .get('h1').contains('Login')
+            .get('form')
     });
 
     it('should allow a user to sign in', () => {
         // register user
         cy
-        .visit('/register')
-        .get('input[name="username"]').type(username)
-        .get('input[name="email"]').type(email)
-        .get('input[name="password"]').type(password)
-        .get('input[type="submit"]').click()
+            .visit('/register')
+            .get('input[name="username"]').type(username)
+            .get('input[name="email"]').type(email)
+            .get('input[name="password"]').type(password)
+            .get('input[type="submit"]').click()
 
         // log a user out
         cy.get('.navbar-burger').click();
@@ -29,20 +29,20 @@ describe('Login', () => {
 
         // log a user in
         cy
-        .get('a').contains('Log In').click()
-        .get('input[name="email"]').type(email)
-        .get('input[name="password"]').type(password)
-        .get('input[type="submit"]').click()
-        .wait(100);
+            .get('a').contains('Log In').click()
+            .get('input[name="email"]').type(email)
+            .get('input[name="password"]').type(password)
+            .get('input[type="submit"]').click()
+            .wait(100);
 
         // assert user is redirected to '/'
         // assert '/' is displayed properly
         cy.get('.navbar-burger').click();
         cy.contains('All Users');
         cy
-        .get('table')
-        .find('tbody > tr').last()
-        .find('td').contains(username);
+            .get('table')
+            .find('tbody > tr').last()
+            .find('td').contains(username);
         cy.get('.navbar-burger').click();
         cy.get('.navbar-menu').within(() => {
         cy
@@ -54,7 +54,7 @@ describe('Login', () => {
 
         // log a user out
         cy
-        .get('a').contains('Log Out').click();
+            .get('a').contains('Log Out').click();
 
         // assert '/logout' is displayed properly
         cy.get('p').contains('You are now logged out');
