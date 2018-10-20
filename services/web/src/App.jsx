@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import axios from 'axios';
 
 import About from './components/About';
-import Form from './components/Form';
+import Form from './components/forms/Form';
 import Logout from './components/Logout';
 import NavBar from './components/NavBar';
 import UsersList from './components/UsersList';

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 
-import Form from '../Form';
+import Form from '../forms/Form';
 
 const formData = {
     username: '',
@@ -57,11 +57,18 @@ describe('When not authenticated', () => {
             wrapper.find('form').simulate('submit', el.formData);
             expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledWith(el.formData);
             expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledTimes(1);
-          });
+            expect(wrapper.instance().validateForm).toHaveBeenCalledTimes(1);
+        });
 
         it(`$(el.formType) Form renders a snapshot properly`, () => {
             const tree = renderer.create(component).toJSON();
             expect(tree).toMatchSnapshot();
+        });
+
+        it(`${el.formType} Form should be disabled by default`, () => {
+            const wrapper = shallow(component);
+            const input = wrapper.find('input[type="submit"]');
+            expect(input.get(0).props.disabled).toEqual(true);
         });
     });
 })
