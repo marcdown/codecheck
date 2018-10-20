@@ -27,11 +27,10 @@ describe('Status', () => {
             .get('input[type="submit"]').click()
             .get('.navbar-burger').click();
 
-        cy.wait(400);
+        cy.wait(1000);
 
         // assert '/status' is displayed properly
         cy.visit('/status');
-        cy.wait(400);
         cy.get('.navbar-burger').click();
         cy.contains('User Status').click();
         cy.get('li > strong').contains('User ID:')
