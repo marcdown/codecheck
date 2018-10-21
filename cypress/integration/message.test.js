@@ -49,6 +49,7 @@ describe('Message', () => {
     // log a user out
     cy.get('.navbar-burger').click();
     cy.contains('Log Out').click();
+    cy.wait(500);
 
     // log a user in
     cy.contains('Log In').click()
