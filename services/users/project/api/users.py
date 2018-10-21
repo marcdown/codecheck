@@ -101,7 +101,6 @@ def get_single_user(user_id):
                     'id': user.id,
                     'username': user.username,
                     'email': user.email,
-                    'password': user.password,
                     'active': user.active
                 }
             }
