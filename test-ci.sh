@@ -1,6 +1,6 @@
 #!/bin/bash
 
-type=$1
+env=$1
 fails=""
 
 inspect() {
