@@ -9,7 +9,7 @@ inspect() {
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
 
-    if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
+    if [ "$TRAVIS_BRANCH" == "ecr" ] || [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
     then
         curl "https://s3.amazon.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
 
@@ -22,10 +22,12 @@ then
         export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
     fi
 
-    if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
+    if [ "$TRAVIS_BRANCH" == "ecr" ] || [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ]
     then
         type=$1
         fails=""
+        echo "\n"
+        echo "Initializing Docker builds\n"
 
         # users
         docker build $USERS_REPO -t $USERS:$COMMIT -f Dockerfile-prod
