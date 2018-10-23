@@ -10,7 +10,6 @@ services:
 env:
   DOCKER_COMPOSE_VERSION: 1.21.1
   COMMIT: ${TRAVIS_COMMIT::8}
-  MAIN_REPO: https://github.com/opcodio/codecheck.git
   USERS: codecheck-users
   USERS_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/users
   USERS_DB: codecheck-users_db
