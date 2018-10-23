@@ -1,20 +1,20 @@
 #!/bin/bash
 
 inspect() {
-    if [ $1 -ne 0 ]; then
+    if [[ $1 -ne 0 ]]; then
         fails="${fails} $2"
     fi
 }
 
-if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ] then
+if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
 
-    if [[ "$TRAVIS_BRANCH" == "staging" ]]; then
+    if [[ $TRAVIS_BRANCH == "staging" ]]; then
         export DOCKER_ENV=staging
-    elif [[ "$TRAVIS_BRANCH" == "production" ]]; then
+    elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
     fi
 
-    if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ] then
+    if [[ $TRAVIS_BRANCH == "staging" ]] || [[ $TRAVIS_BRANCH == "production" ]]; then
         curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
 
         unzip awscli-bundle.zip
@@ -26,7 +26,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ] then
         export REPO=$AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
     fi
 
-    if [ "$TRAVIS_BRANCH" == "staging" ] || [ "$TRAVIS_BRANCH" == "production" ] then
+    if [[ $TRAVIS_BRANCH == "staging" ]] || [[ $TRAVIS_BRANCH == "production" ]]; then
         type=$1
         fails=""
         echo "\n"
@@ -62,7 +62,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ] then
         inspect $? docker-push-swagger
 
         # return proper code
-        if [ -n "${fails}" ]; then
+        if [[ -n ${fails} ]]; then
             echo "\n"
             echo "Docker builds failed: ${fails}"
             exit 1
