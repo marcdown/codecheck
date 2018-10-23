@@ -9,6 +9,18 @@ services:
 
 env:
   DOCKER_COMPOSE_VERSION: 1.21.1
+  COMMIT: ${TRAVIS_COMMIT::8}
+  MAIN_REPO: https://github.com/opcodio/codecheck.git
+  USERS: codecheck-users
+  USERS_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/users
+  USERS_DB: codecheck-users_db
+  USERS_DB_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/users/project/db
+  WEB: codecheck-web
+  WEB_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/web
+  SWAGGER: codecheck-swagger
+  SWAGGER_REPO: ${MAIN_REPO}#${TRAVIS_BRANCH}:services/swagger
+  SECRET_KEY: dev_secret
+  
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
@@ -22,3 +34,6 @@ before_script:
 
 script:
   - bash test.sh
+
+after_success:
+  - base ./docker-push.sh
