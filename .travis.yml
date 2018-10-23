@@ -36,4 +36,4 @@ script:
   - bash test.sh
 
 after_success:
-  - base ./docker-push.sh
+  - bash ./docker-push.sh
