@@ -62,7 +62,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         inspect $? docker-push-swagger
 
         # return proper code
-        if [[ -n ${fails} ]]; then
+        if [[ -n "${fails}" ]]; then
             echo "\n"
             echo "Docker builds failed: ${fails}"
             exit 1
