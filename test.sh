@@ -50,15 +50,15 @@ all() {
 }
 
 # run appropriate tests
-if [[ "${type}" == "server" ]]; then
+if [[ ${type} == "server" ]]; then
     echo "\n"
     echo "Running server-side tests!\n"
     server
-elif [[ "${type}" == "web" ]]; then
+elif [[ ${type} == "web" ]]; then
     echo "\n"
     echo "Running web tests!\n"
     client
-elif [[ "${type}" == "e2e" ]]; then
+elif [[ ${type} == "e2e" ]]; then
     echo "\n"
     echo "Running e2e tests!\n"
     e2e
@@ -69,7 +69,7 @@ else
 fi
 
 # return proper code
-if [[ -n "${fails}" ]]; then
+if [[ -n ${fails} ]]; then
     echo "\n"
     echo "Tests failed: ${fails}"
     exit 1
