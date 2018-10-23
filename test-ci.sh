@@ -1,6 +1,6 @@
 #!/bin/bash
 
-type=$1
+env=$1
 fails=""
 
 inspect() {
@@ -31,13 +31,13 @@ e2e() {
 }
 
 # run appropriate tests
-if [[ ${env} == "development" ]]; then
+if [[ "${env}" == "development" ]]; then
     echo "Running web and server tests"
     dev
-elif [[ ${env} == "staging" ]]; then
+elif [[ "${env}" == "staging" ]]; then
     echo "Running e2e tests"
     e2e staging
-elif [[ ${env} == "production" ]]; then
+elif [[ "${env}" == "production" ]]; then
     echo "Running e2e tests"
     e2e prod
 else
@@ -46,7 +46,7 @@ else
 fi
 
 # return proper code
-if [[ -n ${fails} ]]; then
+if [[ -n "${fails}" ]]; then
     echo "\n"
     echo "Tests failed: ${fails}"
     exit 1
