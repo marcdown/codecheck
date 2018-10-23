@@ -19,8 +19,8 @@ server() {
     docker-compose -f docker-compose-dev.yml down
 }
 
-# run client-side tests
-client() {
+# run web tests
+web() {
     docker-compose -f docker-compose-dev.yml up -d --build
     docker-compose -f docker-compose-dev.yml run web yarn test --coverage
     inspect $? web
@@ -54,9 +54,9 @@ if [[ "${type}" == "server" ]]; then
     echo "\n"
     echo "Running server-side tests!\n"
     server
-elif [[ "${type}" == "client" ]]; then
+elif [[ "${type}" == "web" ]]; then
     echo "\n"
-    echo "Running client-side tests!\n"
+    echo "Running web tests!\n"
     client
 elif [[ "${type}" == "e2e" ]]; then
     echo "\n"
