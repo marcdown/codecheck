@@ -32,5 +32,5 @@ before_script:
   - yarn install
 
 script:
- # - bash ./test.sh
+  - bash ./test.sh
   - bash ./docker-push.sh
