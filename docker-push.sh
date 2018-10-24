@@ -33,28 +33,32 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         echo "Initializing Docker builds\n"
 
         # users
-        docker build $USERS_REPO -t $USERS:$COMMIT -f Dockerfile-$DOCKER_ENV
+        docker pull $REPO/$USERS:$TAG
+        docker build $USERS_REPO --cache-from $REPO/$USERS:$TAG -t $USERS:$COMMIT -f Dockerfile-$DOCKER_ENV
         inspect $? docker-build-users
         docker tag $USERS:$COMMIT $REPO/$USERS:$TAG
         inspect $? docker-tag-users
         docker push $REPO/$USERS:$TAG
         inspect $? docker-push-users
         # users db
-        docker build $USERS_DB_REPO -t $USERS_DB:$COMMIT -f Dockerfile
+        docker pull $REPO/$USERS_DB:$TAG
+        docker build $USERS_DB_REPO --cache-from $REPO/$USERS_DB:$TAG -t $USERS_DB:$COMMIT -f Dockerfile
         inspect $? docker-build-users_db
         docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
         inspect $? docker-tag-users_db
         docker push $REPO/$USERS_DB:$TAG
         inspect $? docker-push-users_db
         # web
-        docker build $WEB_REPO -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=TBD
+        docker pull $REPO/$WEB:$TAG
+        docker build $WEB_REPO --cache-from $REPO/$WEB:$TAG -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=TBD
         inspect $? docker-build-web
         docker tag $WEB:$COMMIT $REPO/$WEB:$TAG
         inspect $? docker-tag-web
         docker push $REPO/$WEB:$TAG
         inspect $? docker-push-web
         # swagger
-        docker build $SWAGGER_REPO -t $SWAGGER:$COMMIT -f Dockerfile-$DOCKER_ENV
+        docker pull $REPO/$SWAGGER:$TAG
+        docker build $SWAGGER_REPO --cache-from $REPO/$SWAGGER:$TAG -t $SWAGGER:$COMMIT -f Dockerfile-$DOCKER_ENV
         inspect $? docker-build-swagger
         docker tag $SWAGGER:$COMMIT $REPO/$SWAGGER:$TAG
         inspect $? docker-tag-swagger
