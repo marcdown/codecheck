@@ -10,6 +10,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
 
     if [[ $TRAVIS_BRANCH == "staging" ]]; then
         export DOCKER_ENV=staging
+        export REACT_APP_USERS_SERVICE_URL="http://codecheck-staging-alb-1792770867.us-east-1.elb.amazonaws.com"
     elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
     fi
@@ -50,7 +51,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         inspect $? docker-push-users_db
         # web
         docker pull $REPO/$WEB:$TAG
-        docker build $WEB_REPO --cache-from $REPO/$WEB:$TAG -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=TBD
+        docker build $WEB_REPO --cache-from $REPO/$WEB:$TAG -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL
         inspect $? docker-build-web
         docker tag $WEB:$COMMIT $REPO/$WEB:$TAG
         inspect $? docker-tag-web
