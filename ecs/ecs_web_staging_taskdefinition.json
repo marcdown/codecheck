@@ -1,0 +1,25 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/codecheck-web:staging",
+      "essential": true,
+      "memoryReservation": 300,
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "codecheck-web-staging",
+          "awslogs-region": "us-east-1"
+        }
+      }
+    }
+  ],
+  "family": "codecheck-web-staging-td"
+}

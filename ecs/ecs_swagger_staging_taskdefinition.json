@@ -1,0 +1,32 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "swagger",
+      "image": "%s.dkr.ecr.us-east-1.amazonaws.com/codecheck-swagger:staging",
+      "essential": true,
+
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "codecheck-swagger-staging",
+          "awslogs-region": "us-east-1"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "protocol": "tcp",
+          "containerPort": 8080
+        }
+      ],
+      "environment": [
+        {
+          "name": "URL",
+          "value": "swagger.json"
+        }
+      ],
+      "memoryReservation": 300
+    }
+  ],
+  "family": "codecheck-swagger-staging-td"
+}
