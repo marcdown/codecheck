@@ -13,6 +13,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         export REACT_APP_USERS_SERVICE_URL="http://codecheck-staging-alb-1792770867.us-east-1.elb.amazonaws.com"
     elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
+        export REACT_APP_USERS_SERVICE_URL="http://codecheck-prod-alb-1062456853.us-east-1.elb.amazonaws.com"
     fi
 
     if [[ $TRAVIS_BRANCH == "staging" ]] || [[ $TRAVIS_BRANCH == "production" ]]; then
