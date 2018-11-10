@@ -3,7 +3,7 @@
 if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]
 then
 
-  if [ "$TRAVIS_BRANCH" == "staging" ]
+  if [ "$TRAVIS_BRANCH" == "production" ]
   then
 
     JQ="jq --raw-output --exit-status"
@@ -33,20 +33,20 @@ then
 
     deploy_cluster() {
 
-      cluster="codecheck-staging-cluster"
+      cluster="codecheck-prod-cluster"
 
       # users
-      service="codecheck-users-staging-service"
-      template="ecs_users_staging_taskdefinition.json"
+      service="codecheck-users-prod-service"
+      template="ecs_users_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
-      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_RDS_URI $PRODUCTION_SECRET_KEY)
       echo "$task_def"
       register_definition
       update_service
 
       # web
-      service="codecheck-web-staging-service"
-      template="ecs_web_staging_taskdefinition.json"
+      service="codecheck-web-prod-service"
+      template="ecs_web_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
@@ -54,8 +54,8 @@ then
       update_service
 
       # swagger
-      service="codecheck-swagger-staging-service"
-      template="ecs_swagger_staging_taskdefinition.json"
+      service="codecheck-swagger-prod-service"
+      template="ecs_swagger_prod_taskdefinition.json"
       task_template=$(cat "ecs/$template")
       task_def=$(printf "$task_template" $AWS_ACCOUNT_ID)
       echo "$task_def"
