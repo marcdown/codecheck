@@ -42,14 +42,18 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         inspect $? docker-tag-users
         docker push $REPO/$USERS:$TAG
         inspect $? docker-push-users
-        # users db
-        docker pull $REPO/$USERS_DB:$TAG
-        docker build $USERS_DB_REPO --cache-from $REPO/$USERS_DB:$TAG -t $USERS_DB:$COMMIT -f Dockerfile
-        inspect $? docker-build-users_db
-        docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
-        inspect $? docker-tag-users_db
-        docker push $REPO/$USERS_DB:$TAG
-        inspect $? docker-push-users_db
+
+        # users db (non-production builds)
+        if [[ $TRAVIS_BRANCH != "production" ]]; then
+            docker pull $REPO/$USERS_DB:$TAG
+            docker build $USERS_DB_REPO --cache-from $REPO/$USERS_DB:$TAG -t $USERS_DB:$COMMIT -f Dockerfile
+            inspect $? docker-build-users_db
+            docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
+            inspect $? docker-tag-users_db
+            docker push $REPO/$USERS_DB:$TAG
+            inspect $? docker-push-users_db
+        fi
+
         # web
         docker pull $REPO/$WEB:$TAG
         docker build $WEB_REPO --cache-from $REPO/$WEB:$TAG -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL
@@ -58,6 +62,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         inspect $? docker-tag-web
         docker push $REPO/$WEB:$TAG
         inspect $? docker-push-web
+
         # swagger
         docker pull $REPO/$SWAGGER:$TAG
         docker build $SWAGGER_REPO --cache-from $REPO/$SWAGGER:$TAG -t $SWAGGER:$COMMIT -f Dockerfile-$DOCKER_ENV
