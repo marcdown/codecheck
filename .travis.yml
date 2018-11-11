@@ -33,8 +33,8 @@ before_script:
 
 script:
   - bash ./test-ci.sh $TRAVIS_BRANCH
+  - bash ./docker-push.sh
 
 after_success:
-  - bash ./docker-push.sh
   - bash ./docker-deploy-staging.sh
   - bash ./docker-deploy-prod.sh
