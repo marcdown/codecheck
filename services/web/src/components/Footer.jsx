@@ -6,7 +6,7 @@ const Footer = (props) => (
     <footer className="footer">
         <div className="container">
             <small className="has-text-grey">
-                <span>Copyright 2018 Codecheck.</span>
+                <span>Copyright 2018 Codecheck</span>
             </small>
         </div>
     </footer>

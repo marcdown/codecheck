@@ -8,7 +8,7 @@ test('Footer renders properly', () => {
     const wrapper = shallow(<Footer/>);
     const element = wrapper.find('span');
     expect(element.length).toBe(1);
-    expect(element.text().toBe('Copyright 2018 Codecheck'));
+    expect(element.text()).toBe('Copyright 2018 Codecheck');
 });
 
 test('Footer renders a snapshot properly', () => {
