@@ -57,7 +57,7 @@ if [[ ${type} == "server" ]]; then
 elif [[ ${type} == "web" ]]; then
     echo "\n"
     echo "Running web tests!\n"
-    client
+    web
 elif [[ ${type} == "e2e" ]]; then
     echo "\n"
     echo "Running e2e tests!\n"
