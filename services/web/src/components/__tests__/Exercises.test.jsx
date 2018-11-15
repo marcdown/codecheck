@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
+import AceEditor from 'react-ace';
+jest.mock('react-ace');
 import Exercises from '../Exercises';
 
 test('Exercises renders properly', () => {

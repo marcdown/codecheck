@@ -16,6 +16,13 @@ exports[`Exercises renders a snapshot properly 1`] = `
       Define a function called sum that takes 
                 two integers as arguments and returns their sum.
     </h5>
+    <button
+      className="button is-primary"
+    >
+      Run Code
+    </button>
+    <hr />
+    <br />
   </div>
 </div>
 `;
