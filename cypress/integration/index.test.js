@@ -29,7 +29,7 @@ describe('Index', () => {
           .get('input[name="email"]').type(email)
           .get('input[name="password"]').type(password)
           .get('input[type="submit"]').click()
-          .wait('@createuser');
+          .wait('@createUser');
 
         // assert '/' is displayed properly
         cy.get('h1').contains('Exercises')
