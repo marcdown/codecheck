@@ -9,6 +9,13 @@ exports[`Exercises renders a snapshot properly 1`] = `
   </h1>
   <hr />
   <br />
+  <div
+    className="notification is-warning"
+  >
+    <span>
+      Please log in to submit an exercise.
+    </span>
+  </div>
   <div>
     <h5
       className="title is-5"
@@ -18,6 +25,7 @@ exports[`Exercises renders a snapshot properly 1`] = `
     </h5>
     <button
       className="button is-primary"
+      onClick={[Function]}
     >
       Run Code
     </button>

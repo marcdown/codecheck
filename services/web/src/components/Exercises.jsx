@@ -7,8 +7,21 @@ class Exercises extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            exercises: []
+            exercises: [],
+            editor: {
+                value: '# Enter your code here.'
+            }
         };
+        this.onChange = this.onChange.bind(this);
+        this.submitExercise = this.submitExercise.bind(this);
+    };
+
+    onChange(value) {
+        this.setState({
+            editor: {
+                value: value
+            }
+        });
     };
 
     getExercises() {
@@ -32,15 +45,25 @@ class Exercises extends Component {
         this.setState({ exercises: exercises });
     };
 
+    submitExercise(event) {
+        event.preventDefault();
+        console.log(this.state.editor.value);
+    };
+
     componentDidMount() {
         this.getExercises();
-    }
+    };
 
     render() {
         return (
             <div>
                 <h1 className="title is-1">Exercises</h1>
                 <hr/><br/>
+                {!this.props.isAuthenticated &&
+                    <div className="notification is-warning">
+                        <span>Please log in to submit an exercise.</span>
+                    </div>
+                }
                 {this.state.exercises.length &&
                     <div key={this.state.exercises[0].id}>
                         <h5 className="title is-5">{this.state.exercises[0].body}</h5>
@@ -48,12 +71,13 @@ class Exercises extends Component {
                             theme="solarized_dark"
                             name={(this.state.exercises[0].id).toString()}
                             onLoad={this.onLoad}
+                            onChange={this.onChange}
                             fontSize={14}
                             height={'175px'}
                             showPrintMargin={true}
                             showGutter={true}
                             highlightActiveLine={true}
-                            value={'# Enter your code here.'}
+                            value={this.state.editor.value}
                             style={{
                                 marginBottom: '10px'
                             }}
@@ -61,7 +85,7 @@ class Exercises extends Component {
                                 $blockScrolling: Infinity
                             }}
                         />
-                        <button className="button is-primary">Run Code</button>
+                        <button className="button is-primary" onClick={this.submitExercise}>Run Code</button>
                         <hr/><br/>
                     </div>
                 }
