@@ -29,6 +29,22 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  exercises:
+    build:
+      context: ./services/exercises
+      dockerfile: Dockerfile-dev
+    volumes:
+      - './services/exercises:/usr/src/app'
+    ports:
+      - 5002:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - USERS_SERVICE_URL=http://users:5000
+      - SECRET_KEY=dev_secret
+    depends_on:
+      - users
+
   web:
     build:
       context: ./services/web
