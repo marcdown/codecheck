@@ -8,4 +8,4 @@ Flask-SQLAlchemy==2.3.2
 Flask-Testing==0.6.2
 gunicorn==19.8.1
 psycopg2-binary==2.7.5
-requests==2.19.1
+requests==2.20.1
