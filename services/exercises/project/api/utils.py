@@ -30,7 +30,7 @@ def authenticate(f):
     return decorated_function
 
 
-def ensure_authenticated(token): 
+def ensure_authenticated(token):
     if current_app.config['TESTING']:
         return True
     users_service_url = current_app.config['USERS_SERVICE_URL']
