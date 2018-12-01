@@ -32,7 +32,12 @@ def authenticate(f):
 
 def ensure_authenticated(token):
     if current_app.config['TESTING']:
-        return True
+        test_response = {
+            'data': {'id': 998877},
+            'status': 'success',
+            'admin': True
+        }
+        return test_response
     users_service_url = current_app.config['USERS_SERVICE_URL']
     url = f'{users_service_url}/auth/status'
     bearer = f'Bearer {token}'
