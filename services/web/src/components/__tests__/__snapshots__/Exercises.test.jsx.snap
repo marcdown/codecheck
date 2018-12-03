@@ -16,21 +16,6 @@ exports[`Exercises renders a snapshot properly 1`] = `
       Please log in to submit an exercise.
     </span>
   </div>
-  <div>
-    <h5
-      className="title is-5"
-    >
-      Define a function called sum that takes 
-                two integers as arguments and returns their sum.
-    </h5>
-    <button
-      className="button is-primary"
-      onClick={[Function]}
-    >
-      Run Code
-    </button>
-    <hr />
-    <br />
-  </div>
+  0
 </div>
 `;
