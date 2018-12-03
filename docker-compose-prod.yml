@@ -27,6 +27,31 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   
+  exercises:
+    build:
+      context: ./services/exercises
+      dockerfile: Dockerfile-prod
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=project.config.StagingConfig
+      - DATABASE_URL=postgres://postgres:postgres@exercises-db:5432/users_prod
+      - DATABASE_TEST_URL=postgres://postgres:postgres@exercises-db:5432/users_test
+    depends_on:
+      - users
+      - exercises-db
+    expose:
+      - '5000'
+  
+  exercises-db:
+    build:
+      context: ./services/exercises/project/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  
   web:
     build:
       context: ./services/web

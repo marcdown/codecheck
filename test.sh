@@ -35,7 +35,7 @@ web() {
 e2e() {
     docker-compose -f docker-compose-staging.yml up -d --build
     docker-compose -f docker-compose-staging.yml run users python manage.py recreate-db
-    ./node_modules/.bin/cypress run --config baseUrl=http://localhost --env REACT_APP_API_GATEWAY_URL=$REACT_APP_API_GATEWAY_URL,LOAD_BALANCER_STAGING_DNS_NAME=http://localhost
+    ./node_modules/.bin/cypress run --config baseUrl=http://localhost --env REACT_APP_API_GATEWAY_URL=$REACT_APP_API_GATEWAY_URL,LOAD_BALANCER_DNS_NAME=http://localhost
     inspect $? e2e
     docker-compose -f docker-compose-staging.yml down
 }
