@@ -35,6 +35,7 @@ before_script:
   - export REACT_APP_USERS_SERVICE_URL=http://127.0.0.1
   - export REACT_APP_EXERCISES_SERVICE_URL=http://127.0.0.1
   - export REACT_APP_API_GATEWAY_URL=https://ksed5f28zk.execute-api.us-east-1.amazonaws.com/v1/execute
+  - export LOAD_BALANCER_STAGING_DNS_NAME=https://staging.fyles.io
   - yarn install
 
 script:
