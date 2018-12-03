@@ -69,7 +69,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         # exercises db (non-production builds)
         if [[ $TRAVIS_BRANCH != "production" ]]; then
             docker pull $REPO/$EXERCISES_DB:$TAG
-            docker build $EXERCISES_DB --cache-from $REPO/$EXERCISES_DB:$TAG -t $EXERCISES_DB:$COMMIT -f Dockerfile
+            docker build $EXERCISES_DB_REPO --cache-from $REPO/$EXERCISES_DB:$TAG -t $EXERCISES_DB:$COMMIT -f Dockerfile
             inspect $? docker-build-exercises_db
             docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:$TAG
             inspect $? docker-tag-exercises_db
