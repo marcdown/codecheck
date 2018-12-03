@@ -11,6 +11,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
     if [[ $TRAVIS_BRANCH == "staging" ]]; then
         export DOCKER_ENV=staging
         export REACT_APP_USERS_SERVICE_URL="https://staging.fyles.io"
+        export REACT_APP_EXERCISES_SERVICE_URL="https://staging.fyles.io"
     elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
         export REACT_APP_USERS_SERVICE_URL="https://fyles.io"
@@ -56,9 +57,29 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
             inspect $? docker-push-users_db
         fi
 
+        # exercises
+        docker pull $REPO/$EXERCISES:$TAG
+        docker build $EXERCISES_REPO --cache-from $REPO/$EXERCISES:$TAG -t $EXERCISES:$COMMIT -f Dockerfile-$DOCKER_ENV
+        inspect $? docker-build-exercises
+        docker tag $EXERCISES:$COMMIT $REPO/$EXERCISES:$TAG
+        inspect $? docker-tag-exercises
+        docker push $REPO/$EXERCISES:$TAG
+        inspect $? docker-push-exercises
+
+        # exercises db (non-production builds)
+        if [[ $TRAVIS_BRANCH != "production" ]]; then
+            docker pull $REPO/$EXERCISES_DB:$TAG
+            docker build $EXERCISES_DB --cache-from $REPO/$EXERCISES_DB:$TAG -t $EXERCISES_DB:$COMMIT -f Dockerfile
+            inspect $? docker-build-exercises_db
+            docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:$TAG
+            inspect $? docker-tag-exercises_db
+            docker push $REPO/$EXERCISES_DB:$TAG
+            inspect $? docker-push-exercises_db
+        fi
+
         # web
         docker pull $REPO/$WEB:$TAG
-        docker build $WEB_REPO --cache-from $REPO/$WEB:$TAG -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL
+        docker build $WEB_REPO --cache-from $REPO/$WEB:$TAG -t $WEB:$COMMIT -f Dockerfile-$DOCKER_ENV --build-arg REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL --build-arg REACT_APP_EXERCISES_SERVICE_URL=$REACT_APP_EXERCISES_SERVICE_URL --build-arg REACT_APP_API_GATEWAY_URL=$REACT_APP_API_GATEWAY_URL
         inspect $? docker-build-web
         docker tag $WEB:$COMMIT $REPO/$WEB:$TAG
         inspect $? docker-tag-web
