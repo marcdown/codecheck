@@ -33,10 +33,9 @@ services:
       dockerfile: Dockerfile-prod
     environment:
       - FLASK_ENV=production
-      - APP_SETTINGS=project.config.ProductionConfig
+      - APP_SETTINGS=project.config.StagingConfig
       - DATABASE_URL=postgres://postgres:postgres@exercises-db:5432/users_prod
       - DATABASE_TEST_URL=postgres://postgres:postgres@exercises-db:5432/users_test
-      - SECRET_KEY=${SECRET_KEY}
     depends_on:
       - users
       - exercises-db
