@@ -47,16 +47,14 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         docker push $REPO/$USERS:$TAG
         inspect $? docker-push-users
 
-        # users db (non-production builds)
-        if [[ $TRAVIS_BRANCH != "production" ]]; then
-            docker pull $REPO/$USERS_DB:$TAG
-            docker build $USERS_DB_REPO --cache-from $REPO/$USERS_DB:$TAG -t $USERS_DB:$COMMIT -f Dockerfile
-            inspect $? docker-build-users_db
-            docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
-            inspect $? docker-tag-users_db
-            docker push $REPO/$USERS_DB:$TAG
-            inspect $? docker-push-users_db
-        fi
+        # users db
+        docker pull $REPO/$USERS_DB:$TAG
+        docker build $USERS_DB_REPO --cache-from $REPO/$USERS_DB:$TAG -t $USERS_DB:$COMMIT -f Dockerfile
+        inspect $? docker-build-users_db
+        docker tag $USERS_DB:$COMMIT $REPO/$USERS_DB:$TAG
+        inspect $? docker-tag-users_db
+        docker push $REPO/$USERS_DB:$TAG
+        inspect $? docker-push-users_db
 
         # exercises
         docker pull $REPO/$EXERCISES:$TAG
@@ -67,16 +65,14 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         docker push $REPO/$EXERCISES:$TAG
         inspect $? docker-push-exercises
 
-        # exercises db (non-production builds)
-        if [[ $TRAVIS_BRANCH != "production" ]]; then
-            docker pull $REPO/$EXERCISES_DB:$TAG
-            docker build $EXERCISES_DB_REPO --cache-from $REPO/$EXERCISES_DB:$TAG -t $EXERCISES_DB:$COMMIT -f Dockerfile
-            inspect $? docker-build-exercises_db
-            docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:$TAG
-            inspect $? docker-tag-exercises_db
-            docker push $REPO/$EXERCISES_DB:$TAG
-            inspect $? docker-push-exercises_db
-        fi
+        # exercises db
+        docker pull $REPO/$EXERCISES_DB:$TAG
+        docker build $EXERCISES_DB_REPO --cache-from $REPO/$EXERCISES_DB:$TAG -t $EXERCISES_DB:$COMMIT -f Dockerfile
+        inspect $? docker-build-exercises_db
+        docker tag $EXERCISES_DB:$COMMIT $REPO/$EXERCISES_DB:$TAG
+        inspect $? docker-tag-exercises_db
+        docker push $REPO/$EXERCISES_DB:$TAG
+        inspect $? docker-push-exercises_db
 
         # web
         docker pull $REPO/$WEB:$TAG
