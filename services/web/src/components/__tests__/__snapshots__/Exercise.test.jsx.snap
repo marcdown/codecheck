@@ -11,7 +11,7 @@ exports[`Exercises renders a snapshot properly when authenticated 1`] = `
     <button
       className="button is-primary"
       disabled={false}
-      onClick={[MockFunction]}
+      onClick={[Function]}
     >
       Run Code
     </button>

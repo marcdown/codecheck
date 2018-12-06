@@ -29,7 +29,7 @@ const Exercise = (props) => {
             <div>
             <button
                 className="button is-primary"
-                onClick={props.submitExercise}
+                onClick={(evt) => props.submitExercise(evt, props.exercise.id)}
                 disabled={props.editor.button.isDisabled}
             >Run Code</button>
             {props.editor.showGrading &&

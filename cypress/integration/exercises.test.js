@@ -40,10 +40,14 @@ describe('Exercises', () => {
       .get('button.button.is-primary').contains('Run Code');
 
     // assert user can submit an exercise
+    for (let i = 0; i < 23; i++) {
+        cy.get('textarea').type('{backspace}', { force: true })
+    }
     cy
+      .get('textarea').type('def sum(x,y):\nreturn x+y', { force: true })
       .get('button').contains('Run Code').click()
       .wait('@gradeExercise')
-      .get('h5 > .grade-text').contains('Incorrect!');
+      .get('h5 > .grade-text').contains('Correct!');
 
   });
 
