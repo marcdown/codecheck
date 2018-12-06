@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class UserStatus extends Component {
@@ -60,6 +61,10 @@ class UserStatus extends Component {
             </div>
         )
     };
+};
+
+UserStatus.propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default UserStatus;

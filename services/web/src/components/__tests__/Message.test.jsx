@@ -15,6 +15,11 @@ describe('When given a success message', () => {
         removeMessage: removeMessage
     }
 
+    beforeEach(() => {
+        console.error = jest.fn();
+        console.error.mockClear();
+    });
+    
     it('Message renders properly', () => {
         const wrapper = shallow(<Message {...messageSuccessProps} />);
         const element = wrapper.find('.notification.is-success');
@@ -47,6 +52,11 @@ describe('When given a danger message', () => {
         removeMessage: removeMessage
     }
 
+    beforeEach(() => {
+        console.error = jest.fn();
+        console.error.mockClear();
+    });
+    
     it(`Message renders properly`, () => {
         const wrapper = shallow(<Message {...messageDangerProps} />);
         const element = wrapper.find('.notification.is-danger');

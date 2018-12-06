@@ -21,6 +21,11 @@ const users = [
     }
 ];
 
+beforeEach(() => {
+    console.error = jest.fn();
+    console.error.mockClear();
+});
+
 test('UsersList renders properly', () => {
     const wrapper = shallow(<UsersList users={users}/>);
     expect(wrapper.find('h1').get(0).props.children).toBe('All Users');
