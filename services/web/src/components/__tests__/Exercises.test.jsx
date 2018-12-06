@@ -28,12 +28,10 @@ test('Exercises renders properly when not authenticated', () => {
     const onDidMount = jest.fn();
     Exercises.prototype.componentDidMount = onDidMount;
     const wrapper = shallow(<Exercises isAuthenticated={false}/>);
-    wrapper.setState({exercises: exercises});
-    const heading = wrapper.find('h5');
-    expect(heading.length).toBe(1);
+    wrapper.setState({exercises : exercises});
     const alert = wrapper.find('.notification');
     expect(alert.length).toBe(1);
-    const alertMessage = wrapper.find(`.notification > span`);
+    const alertMessage = wrapper.find('.notification > span');
     expect(alertMessage.get(0).props.children).toContain('Please log in to submit an exercise.')
 });
 
@@ -41,9 +39,7 @@ test('Exercises renders properly when authenticated', () => {
     const onDidMount = jest.fn();
     Exercises.prototype.componentDidMount = onDidMount;
     const wrapper = shallow(<Exercises isAuthenticated={true}/>);
-    wrapper.setState({exercises: exercises});
-    const heading = wrapper.find('h5');
-    expect(heading.length).toBe(1);
+    wrapper.setState({exercises : exercises});
     const alert = wrapper.find('.notification');
     expect(alert.length).toBe(0);
 });
