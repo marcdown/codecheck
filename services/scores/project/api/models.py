@@ -7,7 +7,7 @@ class Score(db.Model):
     user_id = db.Column(db.Integer, nullable=False)
     exercise_id = db.Column(db.Integer, nullable=False)
     correct = db.Column(db.Boolean, nullable=False)
-    
+
     def __init__(self, user_id, exercise_id, correct):
         self.user_id = user_id
         self.exercise_id = exercise_id
