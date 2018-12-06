@@ -38,7 +38,6 @@ services:
       - APP_SETTINGS=project.config.StagingConfig
       - DATABASE_URL=postgres://postgres:postgres@exercises-db:5432/exercises_staging
       - DATABASE_TEST_URL=postgres://postgres:postgres@exercises-db:5432/exercises_test
-      - SECRET_KEY=dev_secret
     depends_on:
       - users
       - exercises-db
@@ -46,6 +45,31 @@ services:
   exercises-db:
     build:
       context: ./services/exercises/project/db
+      dockerfile: Dockerfile
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  scores:
+    build:
+      context: ./services/scores
+      dockerfile: Dockerfile-staging
+    expose:
+      - 5000
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=project.config.StagingConfig
+      - DATABASE_URL=postgres://postgres:postgres@scores-db:5432/scores_staging
+      - DATABASE_TEST_URL=postgres://postgres:postgres@scores-db:5432/scores_test
+    depends_on:
+      - users
+      - scores-db
+
+  scores-db:
+    build:
+      context: ./services/scores/project/db
       dockerfile: Dockerfile
     expose:
       - 5432
