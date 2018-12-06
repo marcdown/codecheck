@@ -53,6 +53,19 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  scores:
+    build:
+      context: ./services/scores
+      dockerfile: Dockerfile-staging
+    expose:
+      - 5000
+    environment:
+      - FLASK_ENV=production
+      - APP_SETTINGS=project.config.StagingConfig
+      - SECRET_KEY=dev_secret
+    depends_on:
+      - users
+
   web:
     container_name: web
     build:
