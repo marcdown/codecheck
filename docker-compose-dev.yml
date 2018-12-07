@@ -73,9 +73,11 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@scores-db:5432/scores_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@scores-db:5432/scores_test
       - USERS_SERVICE_URL=http://users:5000
+      - EXERCISES_SERVICE_URL=http://exercises:5000
     depends_on:
       - users
       - scores-db
+      - exercises
 
   scores-db:
     build:

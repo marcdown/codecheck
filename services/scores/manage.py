@@ -1,5 +1,8 @@
 # manage.py
 
+import os
+
+import requests
 
 import unittest
 import coverage
@@ -55,6 +58,27 @@ def recreate_db():
     db.drop_all();
     db.create_all();
     db.session.commit();
+
+
+@cli.command()
+def seed_db():
+    """Seeds the database."""
+    # get exercises
+    url = '{0}/exercises'.format(os.environ.get('EXERCISES_SERVICE_URL'))
+    response = requests.get(url)
+    exercises = response.json()['data']['exercises']
+    # get users
+    url = '{0}/users'.format(os.environ.get('USERS_SERVICE_URL'))
+    response = requests.get(url)
+    users = response.json()['data']['users']
+    # seed
+    for user in users:
+        for exercise in exercises:
+            db.session.add(Score(
+                user_id=user['id'],
+                exercise_id=exercise['id']
+            ))
+    db.session.commit()
 
 
 if __name__ == '__main__':
