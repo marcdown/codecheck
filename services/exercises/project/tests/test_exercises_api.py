@@ -8,6 +8,14 @@ from project.tests.utils import add_exercise
 class TestExercisesService(BaseTestCase):
     """Tests for the Exercises Service."""
 
+    def test_ping(self):
+        """Ensure the /ping route behaves correctly."""
+        response = self.client.get('/exercises/ping')
+        data = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('pong!', data['message'])
+        self.assertIn('success', data['status'])
+
     def test_all_exercises(self):
         """Ensure get all exercises behaves correctly."""
         add_exercise()
