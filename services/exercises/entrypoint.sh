@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Waiting for postgres..."
+echo "Waiting for PostgreSQL..."
 
 while ! nc -z exercises-db 5432; do
     sleep 0.1

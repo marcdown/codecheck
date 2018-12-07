@@ -1,8 +1,8 @@
 #!/bin/sh
 
-echo "Waiting for postgres..."
+echo "Waiting for PostgreSQL..."
 
-while ! nc -z exercises-db 5432; do
+while ! nc -z scores-db 5432; do
     sleep 0.1
 done
 
