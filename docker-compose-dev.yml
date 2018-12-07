@@ -13,9 +13,9 @@ services:
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
+      - SECRET_KEY=dev_secret
       - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
-      - SECRET_KEY=dev_secret
     depends_on:
       - users-db
   
@@ -40,10 +40,10 @@ services:
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - USERS_SERVICE_URL=http://users:5000
       - SECRET_KEY=dev_secret
       - DATABASE_URL=postgres://postgres:postgres@exercises-db:5432/exercises_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@exercises-db:5432/exercises_test
+      - USERS_SERVICE_URL=http://users:5000
     depends_on:
       - users
       - exercises-db
@@ -69,10 +69,10 @@ services:
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - USERS_SERVICE_URL=http://users:5000
       - SECRET_KEY=dev_secret
       - DATABASE_URL=postgres://postgres:postgres@scores-db:5432/scores_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@scores-db:5432/scores_test
+      - USERS_SERVICE_URL=http://users:5000
     depends_on:
       - users
       - scores-db
