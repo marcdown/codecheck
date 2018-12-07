@@ -1,17 +1,13 @@
-# project/api/base.py
-
-
 from flask import Blueprint, jsonify
 
 from project.api.utils import authenticate
 
 
-base_blueprint = Blueprint('base', __name__)
+scores_blueprint = Blueprint('scores', __name__)
 
 
-@base_blueprint.route('/base/ping', methods=['GET'])
-@authenticate
-def ping_pong(resp):
+@scores_blueprint.route('/scores/ping', methods=['GET'])
+def ping_pong():
     return jsonify({
         'status': 'success',
         'message': 'pong!'
