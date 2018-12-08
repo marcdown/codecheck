@@ -12,6 +12,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         export DOCKER_ENV=staging
         export REACT_APP_USERS_SERVICE_URL="https://staging.fyles.io"
         export REACT_APP_EXERCISES_SERVICE_URL="https://staging.fyles.io"
+        export REACT_APP_SCORES_SERVICE_URL="https://staging.fyles.io"
     elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
         export REACT_APP_USERS_SERVICE_URL="https://fyles.io"
@@ -73,6 +74,24 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         inspect $? docker-tag-exercises_db
         docker push $REPO/$EXERCISES_DB:$TAG
         inspect $? docker-push-exercises_db
+
+        # scores
+        docker pull $REPO/$SCORES:$TAG
+        docker build $SCORES_REPO --cache-from $REPO/$SCORES:$TAG -t $SCORES:$COMMIT -f Dockerfile-$DOCKER_ENV
+        inspect $? docker-build-scores
+        docker tag $SCORES:$COMMIT $REPO/$SCORES:$TAG
+        inspect $? docker-tag-scores
+        docker push $REPO/$SCORES:$TAG
+        inspect $? docker-push-scores
+
+        # scores db
+        docker pull $REPO/$SCORES_DB:$TAG
+        docker build $SCORES_DB_REPO --cache-from $REPO/$SCORES_DB:$TAG -t $SCORES_DB:$COMMIT -f Dockerfile
+        inspect $? docker-build-scores_db
+        docker tag $SCORES_DB:$COMMIT $REPO/$SCORES_DB:$TAG
+        inspect $? docker-tag-scores_db
+        docker push $REPO/$SCORES_DB:$TAG
+        inspect $? docker-push-scores_db
 
         # web
         docker pull $REPO/$WEB:$TAG
