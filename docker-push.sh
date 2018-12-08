@@ -12,6 +12,7 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
         export DOCKER_ENV=staging
         export REACT_APP_USERS_SERVICE_URL="https://staging.fyles.io"
         export REACT_APP_EXERCISES_SERVICE_URL="https://staging.fyles.io"
+        export REACT_APP_SCORES_SERVICE_URL="https://staging.fyles.io"
     elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
         export REACT_APP_USERS_SERVICE_URL="https://fyles.io"
