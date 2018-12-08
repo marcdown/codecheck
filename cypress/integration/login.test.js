@@ -17,6 +17,10 @@ describe('Login', () => {
     });
 
     it('should allow a user to sign in', () => {
+
+        cy.server();
+        cy.route('POST', 'auth/login').as('loginUser');
+
         // register user
         cy.visit('/register')
           .get('input[name="username"]').type(username)
@@ -33,7 +37,7 @@ describe('Login', () => {
           .get('input[name="email"]').type(email)
           .get('input[name="password"]').type(password)
           .get('input[type="submit"]').click()
-          .wait(100);
+          .wait('@loginUser');
 
         // assert user is redirected to '/'
         cy.get('.notification.is-success').contains('Welcome!');
