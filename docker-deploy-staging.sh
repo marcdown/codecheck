@@ -53,6 +53,14 @@ then
       register_definition
       update_service
 
+      # scores
+      service="codecheck-scores-staging-service"
+      template="ecs_scores_staging_taskdefinition.json"
+      task_template=$(cat "ecs/$template")
+      task_def=$(printf "$task_template" $AWS_ACCOUNT_ID $AWS_ACCOUNT_ID)
+      echo "$task_def"
+      register_definition
+
       # web
       service="codecheck-web-staging-service"
       template="ecs_web_staging_taskdefinition.json"
