@@ -1,0 +1,40 @@
+{
+    "containerDefinitions": [
+      {
+        "name": "scores",
+        "image": "%s.dkr.ecr.us-east-1.amazonaws.com/codecheck-scores:production",
+        "essential": true,
+        "memoryReservation": 300,
+        "portMappings": [
+          {
+            "hostPort": 0,
+            "protocol": "tcp",
+            "containerPort": 5000
+          }
+        ],
+        "environment": [
+          {
+            "name": "APP_SETTINGS",
+            "value": "project.config.ProductionConfig"
+          },
+          {
+            "name": "DATABASE_TEST_URL",
+            "value": "postgres://postgres:postgres@scores-db:5432/scores_test"
+          },
+          {
+            "name": "DATABASE_URL",
+            "value": "%s"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "codecheck-scores-prod",
+            "awslogs-region": "us-east-1"
+          }
+        }
+      }
+    ],
+    "family": "codecheck-scores-prod-td"
+  }
+  
