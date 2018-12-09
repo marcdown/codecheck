@@ -24,6 +24,14 @@
           {
             "name": "DATABASE_URL",
             "value": "%s"
+          },
+          {
+            "name": "USERS_SERVICE_URL",
+            "value": "https://fyles.io"
+          },
+          {
+            "name": "EXERCISES_SERVICE_URL",
+            "value": "https://fyles.io"
           }
         ],
         "logConfiguration": {
