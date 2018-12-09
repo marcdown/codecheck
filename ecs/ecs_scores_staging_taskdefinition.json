@@ -26,8 +26,12 @@
           "value": "postgres://postgres:postgres@scores-db:5432/scores_staging"
         },
         {
-          "name": "SECRET_KEY",
-          "value": "dev_secret"
+          "name": "USERS_SERVICE_URL",
+          "value": "https://staging.fyles.io"
+        },
+        {
+          "name": "EXERCISES_SERVICE_URL",
+          "value": "https://staging.fyles.io"
         }
       ],
       "links": [
