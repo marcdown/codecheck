@@ -10,14 +10,14 @@ if [[ -z $TRAVIS_PULL_REQUEST ]] || [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
 
     if [[ $TRAVIS_BRANCH == "staging" ]]; then
         export DOCKER_ENV=staging
-        export REACT_APP_USERS_SERVICE_URL="https://staging.fyles.io"
-        export REACT_APP_EXERCISES_SERVICE_URL="https://staging.fyles.io"
-        export REACT_APP_SCORES_SERVICE_URL="https://staging.fyles.io"
+        export REACT_APP_USERS_SERVICE_URL="https://staging.codecheck.tech"
+        export REACT_APP_EXERCISES_SERVICE_URL="https://staging.codecheck.tech"
+        export REACT_APP_SCORES_SERVICE_URL="https://staging.codecheck.tech"
     elif [[ $TRAVIS_BRANCH == "production" ]]; then
         export DOCKER_ENV=prod
-        export REACT_APP_USERS_SERVICE_URL="https://fyles.io"
-        export REACT_APP_EXERCISES_SERVICE_URL="https://fyles.io"
-        export REACT_APP_SCORES_SERVICE_URL="https://fyles.io"
+        export REACT_APP_USERS_SERVICE_URL="https://codecheck.tech"
+        export REACT_APP_EXERCISES_SERVICE_URL="https://codecheck.tech"
+        export REACT_APP_SCORES_SERVICE_URL="https://codecheck.tech"
         export DATABASE_URL="$AWS_RDS_URI"
         export SECRET_KEY="$PRODUCTION_SECRET_KEY"
     fi

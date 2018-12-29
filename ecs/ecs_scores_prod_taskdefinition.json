@@ -27,11 +27,11 @@
           },
           {
             "name": "USERS_SERVICE_URL",
-            "value": "https://fyles.io"
+            "value": "https://codecheck.tech"
           },
           {
             "name": "EXERCISES_SERVICE_URL",
-            "value": "https://fyles.io"
+            "value": "https://codecheck.tech"
           }
         ],
         "logConfiguration": {
