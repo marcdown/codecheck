@@ -67,10 +67,10 @@ def seed_db():
         test_code_solution='5'
     ))
     db.session.add(Exercise(
-        body=('Define a function called reverse that takes a string as '
-              'an argument and returns the string in reversed order.'),
-        test_code='reverse(racecar)',
-        test_code_solution='racecar'
+        body=('Define a function called doubleletters that takes a string as '
+              'an argument and returns the string with two of each letter.'),
+        test_code='doubleletters("Hello")',
+        test_code_solution='HHeelllloo'
     ))
     db.session.add(Exercise(
         body=('Define a function called factorial that takes a random number '
