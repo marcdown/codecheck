@@ -24,4 +24,4 @@ You can try it out at https://codecheck.tech.
 * ECS for orchestration and auto scaling
 * Travis for CI/CD
 
-[![Codecheck architecture](img/codecheck-architecture.png)](img/codecheck-architecture.png)
+[![Codecheck architecture](img/codecheck-architecture.png)](https://raw.githubusercontent.com/marcdown/codecheck/master/img/codecheck-architecture.png)
