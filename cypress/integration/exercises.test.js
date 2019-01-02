@@ -75,7 +75,7 @@ describe('Exercises', () => {
       .get('.ace_comment').contains('# Enter your code here.')
       // click next
       .get('button').contains('Next').click()
-      .get('button').contains('Next').should('not.be.visible')
+      .get('button').contains('Next')
       .get('button').contains('Prev')
       .get('.ace_comment').contains('# Enter your code here.')
       for (let i = 0; i < 23; i++) {
