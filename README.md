@@ -2,9 +2,7 @@
 [![Build Status](https://travis-ci.org/marcdown/codecheck.svg?branch=master)](https://travis-ci.org/marcdown/codecheck)
 
 ## Overview
-Codecheck is a coding exercise app to test your Python knowledge. Currently there are only a few exercises but more will be added soon.
-
-You can try it out at https://codecheck.tech.
+Codecheck is a coding exercise app to test your Python knowledge. You can try it out at https://codecheck.tech.
 
 ## Architecture
 ### Backend
