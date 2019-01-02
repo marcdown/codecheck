@@ -67,16 +67,58 @@ def seed_db():
         test_code_solution='5'
     ))
     db.session.add(Exercise(
+        body=('Define a function called sum_list that takes a list of numbers '
+              'as an argument and returns their sum.'),
+        test_code='sum_list([1, 2, 3, 4, 5])',
+        test_code_solution='15'
+    ))
+    db.session.add(Exercise(
         body=('Define a function called doubleletters that takes a string as '
               'an argument and returns the string with two of each letter.'),
         test_code='doubleletters("Hello")',
         test_code_solution='HHeelllloo'
     ))
     db.session.add(Exercise(
+        body=('Define a function called slicer that takes a string as '
+              'an argument and returns the first three characters.'),
+        test_code='slicer(\'abcdefgh\')',
+        test_code_solution='abc'
+    ))
+    db.session.add(Exercise(
+        body=('Define a function called dicer that takes a string as '
+              'an argument and returns the third and fifth characters.'),
+        test_code='dicer(\'abcdefgh\')',
+        test_code_solution='ce'
+    ))
+    db.session.add(Exercise(
         body=('Define a function called factorial that takes a random number '
               'as an argument and returns the factorial of that given number.'),
         test_code='factorial(5)',
         test_code_solution='120'
+    ))
+    db.session.add(Exercise(
+        body=('Define a function called isPrime that takes a random number '
+              'as an argument and returns whether or not it is a prime number.'),
+        test_code='isPrime(5)',
+        test_code_solution='True'
+    ))
+    db.session.add(Exercise(
+        body=('Define a function called dectohex that takes a random number '
+              'as an argument and returns the hex value of that number.'),
+        test_code='dectohex(32)',
+        test_code_solution='0x20'
+    ))
+    db.session.add(Exercise(
+        body=('Define a function called squared that takes a list of numbers '
+              'as an argument and returns a list of each number squared.'),
+        test_code='squared([1, 2, 3, 4, 5])',
+        test_code_solution='[1, 4, 9, 16, 25]'
+    ))
+    db.session.add(Exercise(
+        body=('Define a function called evens that takes a list of numbers '
+              'as an argument and returns a list containing only the even numbers.'),
+        test_code='evens([1, 2, 3, 4, 5, 6])',
+        test_code_solution='[2, 4, 6]'
     ))
     db.session.commit()
 
